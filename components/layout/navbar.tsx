@@ -17,19 +17,22 @@ export function Navbar() {
           <div className="flex h-16 items-center justify-between">
             <div className="flex flex-1 items-center">
               <Link href="/" className="text-xl font-bold">
-                Portal Inmobiliario
+                VG Inmobiliaria
               </Link>
             </div>
-            <div className="flex items-center space-x-4">
-              <Link href="/search" className="text-sm">
-                Buscar
+            <div className="flex items-center space-x-6">
+              <Link 
+                href="/properties" 
+                className="text-sm font-medium hover:text-neutral-600"
+              >
+                Propiedades
               </Link>
               <button
                 onClick={() => setShowFavorites(true)}
-                className="flex items-center space-x-1 text-sm"
+                className="flex items-center space-x-1 text-sm hover:text-neutral-600"
               >
-                <HeartIcon className="h-6 w-6" />
-                <span className="ml-2">{favorites.length}</span>
+                <HeartIcon className="h-5 w-5" />
+                <span>{favorites.length}</span>
               </button>
             </div>
           </div>

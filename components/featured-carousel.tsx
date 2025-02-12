@@ -1,86 +1,85 @@
 'use client';
 
+import { Property } from '@/lib/types';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { Property } from 'lib/types';
+import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-export function FeaturedCarousel({ properties }: { properties: Property[] }) {
+interface FeaturedCarouselProps {
+  properties: Property[];
+}
+
+export function FeaturedCarousel({ properties }: FeaturedCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const next = () => {
-    setCurrentIndex((currentIndex + 1) % properties.length);
+    setCurrentIndex((prev) => (prev + 1) % properties.length);
   };
 
-  const prev = () => {
-    setCurrentIndex((currentIndex - 1 + properties.length) % properties.length);
+  const previous = () => {
+    setCurrentIndex((prev) => (prev - 1 + properties.length) % properties.length);
   };
 
-  useEffect(() => {
-    const timer = setInterval(next, 5000);
-    return () => clearInterval(timer);
-  }, [currentIndex]);
+  const property = properties[currentIndex];
 
   return (
-    <div className="relative overflow-hidden bg-black">
-      <div className="relative h-[70vh]">
-        {/* Imagen actual */}
-        <div className="absolute inset-0 transition-opacity duration-500">
-          <img
-            src={properties[currentIndex].image}
-            alt={properties[currentIndex].title}
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20" />
-        </div>
-
-        {/* Contenido */}
-        <div className="absolute inset-0 flex items-end">
-          <div className="container mx-auto px-4 pb-20">
-            <div className="max-w-3xl">
-              <span className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-white/10 text-white backdrop-blur-sm">
-                Propiedad Destacada
-              </span>
-              <h2 className="mt-4 text-4xl font-bold text-white">
-                {properties[currentIndex].title}
-              </h2>
-              <p className="mt-2 text-lg text-white/80">
-                {properties[currentIndex].description}
-              </p>
-              <div className="mt-6 flex items-center gap-4">
-                <Link
-                  href={`/property/${properties[currentIndex].id}`}
-                  className="rounded-lg bg-white px-6 py-3 text-sm font-medium text-black hover:bg-white/90 transition-colors"
-                >
-                  Ver Detalles
-                </Link>
-                <div className="text-white">
-                  <span className="text-2xl font-bold">
-                    ${properties[currentIndex].price.toLocaleString()}
-                  </span>
-                  {properties[currentIndex].listingType === 'alquiler' && (
-                    <span className="ml-1 text-white/70">/mes</span>
-                  )}
-                </div>
-              </div>
-            </div>
+    <div className="container mx-auto px-4">
+      <div className="relative aspect-[4/5] sm:aspect-[16/9] overflow-hidden rounded-xl">
+        <Image
+          src={property.images[0]}
+          alt={property.title}
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+        
+        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8">
+          <h3 className="mb-2 text-xl sm:text-2xl md:text-3xl font-bold text-white">{property.title}</h3>
+          <p className="mb-4 text-sm sm:text-base text-white/90 line-clamp-2 sm:line-clamp-3">{property.description}</p>
+          <div className="flex flex-wrap gap-2 mb-4">
+            <span className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-2.5 py-0.5 text-xs sm:text-sm text-white">
+              {property.type}
+            </span>
+            <span className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-2.5 py-0.5 text-xs sm:text-sm text-white">
+              {property.bedrooms} hab.
+            </span>
+            <span className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-2.5 py-0.5 text-xs sm:text-sm text-white">
+              {property.area.total}m²
+            </span>
           </div>
+          <Link
+            href={`/property/${property.id}`}
+            className="inline-block rounded-lg bg-white px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-neutral-100"
+          >
+            Ver más
+          </Link>
         </div>
 
-        {/* Controles */}
-        <div className="absolute bottom-8 right-8 flex gap-2">
-          <button
-            onClick={prev}
-            className="rounded-full bg-white/10 p-2 text-white backdrop-blur-sm hover:bg-white/20 transition-colors"
-          >
-            <ChevronLeftIcon className="h-6 w-6" />
-          </button>
-          <button
-            onClick={next}
-            className="rounded-full bg-white/10 p-2 text-white backdrop-blur-sm hover:bg-white/20 transition-colors"
-          >
-            <ChevronRightIcon className="h-6 w-6" />
-          </button>
+        <button
+          onClick={previous}
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-1.5 sm:p-2 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
+        >
+          <ChevronLeftIcon className="h-4 w-4 sm:h-6 sm:w-6" />
+        </button>
+        <button
+          onClick={next}
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-1.5 sm:p-2 text-white backdrop-blur-sm transition-colors hover:bg-black/70"
+        >
+          <ChevronRightIcon className="h-4 w-4 sm:h-6 sm:w-6" />
+        </button>
+
+        <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 flex gap-1">
+          {properties.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`h-1.5 w-1.5 rounded-full transition-colors ${
+                index === currentIndex ? 'bg-white' : 'bg-white/50'
+              }`}
+            />
+          ))}
         </div>
       </div>
     </div>

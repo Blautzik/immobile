@@ -1,17 +1,21 @@
-export type PropertyType = 'casa' | 'departamento' | 'terreno' | 'local';
-export type ListingType = 'venta' | 'alquiler';
+export type PropertyType = 'casa' | 'departamento' | 'terreno' | 'ph' | 'otro';
+export type ListingType = 'venta' | 'alquiler' | 'alquiler_temporario';
 
-export interface Property {
+export type Property = {
   id: string;
   title: string;
   description: string;
+  detailedDescription: string;
   price: number;
-  image: string;
+  images: string[];
   type: PropertyType;
   listingType: ListingType;
   featured?: boolean;
   opportunity?: boolean;
   location: string;
+  zone: string;
+  address: string;
+  googleMapsUrl: string;
   bedrooms?: number;
   bathrooms?: number;
   area: {
@@ -19,4 +23,4 @@ export interface Property {
     covered?: number;
   };
   amenities: string[];
-} 
+}; 

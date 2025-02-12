@@ -1,6 +1,7 @@
-export default {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   experimental: {
-    ppr: true,
+    ppr: false,
     inlineCss: true,
     useCache: true,
     reactOwnerStack: true,
@@ -14,6 +15,8 @@ export default {
         hostname: 'cdn.shopify.com',
         pathname: '/s/files/**'
       }
-    ]
+    ],
+    domains: ['images.unsplash.com']
   }
 };
+module.exports = nextConfig

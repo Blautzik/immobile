@@ -1,39 +1,44 @@
 'use client';
 
-import { createContext, ReactNode, useContext, useState } from 'react';
-
-interface Property {
-  id: string;
-  title: string;
-  price: number;
-  image: string;
-  bedrooms: number;
-  bathrooms: number;
-}
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 interface FavoritesContextType {
-  favorites: Property[];
-  addToFavorites: (property: Property) => void;
+  favorites: string[];
+  addToFavorites: (propertyId: string) => void;
   removeFromFavorites: (propertyId: string) => void;
 }
 
 const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined);
 
 export function FavoritesProvider({ children }: { children: ReactNode }) {
-  const [favorites, setFavorites] = useState<Property[]>([]);
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const addToFavorites = (property: Property) => {
-    setFavorites((prev) => {
-      if (!prev.find(p => p.id === property.id)) {
-        return [...prev, property];
-      }
-      return prev;
-    });
+  useEffect(() => {
+    const savedFavorites = localStorage.getItem('propertyFavorites');
+    if (savedFavorites) {
+      setFavorites(JSON.parse(savedFavorites));
+    }
+    setIsLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (isLoaded) {
+      localStorage.setItem('propertyFavorites', JSON.stringify(favorites));
+    }
+  }, [favorites, isLoaded]);
+
+  const addToFavorites = (propertyId: string) => {
+    setFavorites(prev => [...new Set([...prev, propertyId])]);
   };
 
   const removeFromFavorites = (propertyId: string) => {
-    setFavorites((prev) => prev.filter(p => p.id !== propertyId));
+    setFavorites(prev => prev.filter(id => id !== propertyId));
   };
+
+  if (!isLoaded) {
+    return null; // O un loader si prefieres
+  }
 
   return (
     <FavoritesContext.Provider value={{ favorites, addToFavorites, removeFromFavorites }}>

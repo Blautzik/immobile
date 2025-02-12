@@ -11,7 +11,9 @@ export function HeroSection() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push(`/search?q=${encodeURIComponent(searchTerm)}`);
+    if (searchTerm) {
+      router.push(`/properties?search=${encodeURIComponent(searchTerm)}`);
+    }
   };
 
   return (
