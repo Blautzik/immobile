@@ -4,13 +4,13 @@ import { Carousel } from '@/components/ui/carousel';
 import { getPropertyById } from '@/lib/mock-data';
 import { notFound } from 'next/navigation';
 
-interface PropertyPageProps {
+type PageProps = {
   params: {
     id: string;
   };
 }
 
-export default function PropertyPage({ params }: PropertyPageProps) {
+export default function PropertyPage({ params }: PageProps) {
   const property = getPropertyById(params.id);
 
   if (!property) {
@@ -110,4 +110,4 @@ export default function PropertyPage({ params }: PropertyPageProps) {
       </div>
     </main>
   );
-} 
+}
