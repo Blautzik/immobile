@@ -4,7 +4,13 @@ import { Carousel } from '@/components/ui/carousel';
 import { getPropertyById } from '@/lib/mock-data';
 import { notFound } from 'next/navigation';
 
-export default function PropertyPage({ params }: { params: { id: string } }) {
+interface PropertyPageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default function PropertyPage({ params }: PropertyPageProps) {
   const property = getPropertyById(params.id);
 
   if (!property) {
@@ -14,11 +20,11 @@ export default function PropertyPage({ params }: { params: { id: string } }) {
   return (
     <main className="container mx-auto px-4 py-8">
       {/* Carousel de imágenes */}
-      <div className="mb-2 aspect-[6/5] sm:aspect-[16/9] overflow-hidden rounded-xl mt-16">
+      <div className="mb-2 aspect-[4/5] sm:aspect-[16/9] overflow-hidden rounded-xl mt-16">
         <Carousel images={property.images} />
       </div>
 
-      <div className="grid gap-2 lg:grid-cols-[2fr,1fr]">
+      <div className="grid gap-8 lg:grid-cols-[2fr,1fr]">
         <div>
           {/* Información principal */}
           <h1 className="mb-2 text-3xl font-bold">{property.title}</h1>
