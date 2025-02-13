@@ -1,13 +1,11 @@
 'use client';
 
-import { Dialog, Transition } from '@headlessui/react';
-import { FunnelIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import PropertyCard from 'components/property-card';
 import { ZoneSelect } from 'components/ui/zone-select';
 import { filterProperties, getAvailableZones } from 'lib/mock-data';
 import { ListingType, Property, PropertyType } from 'lib/types';
 import { useSearchParams } from 'next/navigation';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const PRICE_RANGES = [
   { min: 0, max: 100000, label: 'Hasta $100,000' },
