@@ -1,18 +1,17 @@
-'use client';
+
 
 import { Carousel } from '@/components/ui/carousel';
 import { getPropertyById } from '@/lib/mock-data';
 import { notFound } from 'next/navigation';
 
 type PageProps = {
-  params: {
-    id: string;
-  };
-}
-// @ts-ignore - Temporalmente ignoramos el error de tipos para que el build funcione
+    params: Promise<{ id: string }>
+  }
 
-export default function PropertyPage({ params }: PageProps) {
-  const property = getPropertyById(params.id);
+
+export default async function PropertyPage({ params }: PageProps) {
+const { id } = await params
+  const property = getPropertyById(id);
 
   if (!property) {
     notFound();
@@ -56,7 +55,7 @@ export default function PropertyPage({ params }: PageProps) {
             <h2 className="mb-4 text-xl font-semibold">Descripción</h2>
             <div 
               className="prose dark:prose-invert"
-              dangerouslySetInnerHTML={{ __html: property.detailedDescription }}
+              dangerouslySetInnerHTML={{ __html: property.detailedDescription ||''}}
             />
           </div>
         </div>

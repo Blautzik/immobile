@@ -1,5 +1,4 @@
-'use client';
-
+import { getPropertyById } from '@/lib/mock-data';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
@@ -62,42 +61,45 @@ export default function FavoritesModal({ open, onClose }: { open: boolean; onClo
                             <p className="text-neutral-500">No hay propiedades guardadas en favoritos.</p>
                           ) : (
                             <ul role="list" className="-my-6 divide-y divide-gray-200">
-                              {favorites.map((property) => (
-                                <li key={property.id} className="flex py-6">
-                                  <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border">
-                                    <img
-                                      src={property.image}
-                                      alt={property.title}
-                                      className="h-full w-full object-cover object-center"
-                                    />
-                                  </div>
+                              {favorites.map((propertyId) => {
+                                const property = getPropertyById(propertyId);
+                                return property ? (
+                                  <li key={property.id} className="flex py-6">
+                                    <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border">
+                                      <img
+                                        src={property.images[0]}
+                                        alt={property.title}
+                                        className="h-full w-full object-cover object-center"
+                                      />
+                                    </div>
 
-                                  <div className="ml-4 flex flex-1 flex-col">
-                                    <div>
-                                      <div className="flex justify-between text-base font-medium">
-                                        <h3>
-                                          <Link href={`/property/${property.id}`} onClick={onClose}>
-                                            {property.title}
-                                          </Link>
-                                        </h3>
-                                        <p className="ml-4">${property.price.toLocaleString()}</p>
+                                    <div className="ml-4 flex flex-1 flex-col">
+                                      <div>
+                                        <div className="flex justify-between text-base font-medium">
+                                          <h3>
+                                            <Link href={`/property/${property.id}`} onClick={onClose}>
+                                              {property.title}
+                                            </Link>
+                                          </h3>
+                                          <p className="ml-4">${property.price.toLocaleString()}</p>
+                                        </div>
+                                        <p className="mt-1 text-sm text-gray-500">
+                                          {property.bedrooms} Habitaciones • {property.bathrooms} Baños
+                                        </p>
                                       </div>
-                                      <p className="mt-1 text-sm text-gray-500">
-                                        {property.bedrooms} Habitaciones • {property.bathrooms} Baños
-                                      </p>
+                                      <div className="flex flex-1 items-end justify-between text-sm">
+                                        <button
+                                          type="button"
+                                          onClick={() => removeFromFavorites(property.id)}
+                                          className="font-medium text-red-600 hover:text-red-500"
+                                        >
+                                          Eliminar
+                                        </button>
+                                      </div>
                                     </div>
-                                    <div className="flex flex-1 items-end justify-between text-sm">
-                                      <button
-                                        type="button"
-                                        onClick={() => removeFromFavorites(property.id)}
-                                        className="font-medium text-red-600 hover:text-red-500"
-                                      >
-                                        Eliminar
-                                      </button>
-                                    </div>
-                                  </div>
-                                </li>
-                              ))}
+                                  </li>
+                                ) : null;
+                              })}
                             </ul>
                           )}
                         </div>

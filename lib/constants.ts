@@ -28,7 +28,6 @@ export const TAGS = {
 
 export const HIDDEN_PRODUCT_TAG = 'nextjs-frontend-hidden';
 export const DEFAULT_OPTION = 'Default Title';
-export const SHOPIFY_GRAPHQL_API_ENDPOINT = '/api/2023-01/graphql.json';
 
 export const PROPERTY_IMAGES = {
   HERO: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750',
@@ -57,6 +56,11 @@ export const PROPERTY_IMAGES = {
     'https://images.unsplash.com/photo-1568605114967-8130f3a36994',
     'https://images.unsplash.com/photo-1512917774080-9991f1c4c750'
   ],
+  CASA_FAMILIAR: [
+    'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83',
+    'https://images.unsplash.com/photo-1568605114967-8130f3a36994',
+    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750'
+  ],
   DEPTO_NUEVO: [
     'https://images.unsplash.com/photo-1493809842364-78817add7ffb',
     'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688',
@@ -72,4 +76,4 @@ export const PROPERTY_IMAGES = {
     'https://images.unsplash.com/photo-1524758631624-e2822e304c36',
     'https://images.unsplash.com/photo-1505873242700-f289a29e1e0f'
   ]
-} as const;
+};

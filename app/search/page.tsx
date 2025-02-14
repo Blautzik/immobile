@@ -48,14 +48,14 @@ export default function SearchPage() {
   }, [filters]);
 
   const isFavorite = (propertyId: string) => {
-    return favorites.some(fav => fav.id === propertyId);
+    return favorites.some(fav => fav === propertyId);
   };
 
   const toggleFavorite = (property: Property) => {
     if (isFavorite(property.id)) {
       removeFromFavorites(property.id);
     } else {
-      addToFavorites(property);
+      addToFavorites(property.id);
     }
   };
 
@@ -122,7 +122,7 @@ export default function SearchPage() {
                 <Link href={`/property/${property.id}`} className="relative">
                   <div className="aspect-[4/3] overflow-hidden">
                     <img
-                      src={property.image}
+                      src={property.images[0]}
                       alt={property.title}
                       className="h-full w-full object-cover object-center transition duration-300 group-hover:scale-105"
                     />

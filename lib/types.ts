@@ -1,13 +1,13 @@
-export type PropertyType = 'casa' | 'departamento' | 'terreno' | 'ph' | 'otro';
+export type PropertyType = 'casa' | 'departamento' | 'terreno' | 'ph' | 'otro' | 'local';
 export type ListingType = 'venta' | 'alquiler' | 'alquiler_temporario';
 
 export type Property = {
   id: string;
   title: string;
   description: string;
-  detailedDescription: string;
+  detailedDescription?: string;
   price: number;
-  images: string[];
+  images: string[] | string ;
   type: PropertyType;
   listingType: ListingType;
   featured?: boolean;

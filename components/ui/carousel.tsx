@@ -23,7 +23,7 @@ export function Carousel({ images }: CarouselProps) {
   return (
     <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
       <Image
-        src={imageArray[currentIndex]}
+        src={imageArray[currentIndex] || ''}
         alt={`Imagen ${currentIndex + 1}`}
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

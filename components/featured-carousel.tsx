@@ -23,11 +23,14 @@ export function FeaturedCarousel({ properties }: FeaturedCarouselProps) {
 
   const property = properties[currentIndex];
 
+
+  if (!property) return null;
+
   return (
     <div className="container mx-auto px-4">
       <div className="relative aspect-[4/5] sm:aspect-[16/9] overflow-hidden rounded-xl">
         <Image
-          src={property.images[0]}
+          src={property?.images[0] || ''}
           alt={property.title}
           fill
           className="object-cover"

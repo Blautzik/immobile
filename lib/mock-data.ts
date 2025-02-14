@@ -24,7 +24,7 @@ export const mockProperties: Property[] = [
       <p>Planta alta: Suite principal, dos dormitorios secundarios, baño completo, estudio/playroom.</p>
     `,
     price: 450000,
-    images: PROPERTY_IMAGES.CASA_MODERNA,
+    images: PROPERTY_IMAGES.CASA_MODERNA.map(image => image),
     type: 'casa',
     listingType: 'venta',
     featured: true,
@@ -52,6 +52,7 @@ export const mockProperties: Property[] = [
     location: 'Belgrano R',
     zone: 'Belgrano',
     address: 'Av. Cabildo 2500',
+    googleMapsUrl: 'https://maps.google.com/?q=-34.5884,-58.4306',
     bedrooms: 2,
     bathrooms: 1,
     area: {
@@ -72,6 +73,7 @@ export const mockProperties: Property[] = [
     location: 'Villa Urquiza',
     zone: 'Villa Urquiza',
     address: 'Av. Triunvirato 3500',
+    googleMapsUrl: 'https://maps.google.com/?q=-34.5884,-58.4306',
     area: {
       total: 1000
     },
@@ -89,6 +91,7 @@ export const mockProperties: Property[] = [
     location: 'San Isidro',
     zone: 'San Isidro',
     address: 'Av. del Libertador 15000',
+    googleMapsUrl: 'https://maps.google.com/?q=-34.5884,-58.4306',
     bedrooms: 4,
     bathrooms: 3,
     area: {
@@ -108,6 +111,7 @@ export const mockProperties: Property[] = [
     location: 'Recoleta',
     zone: 'Recoleta',
     address: 'Av. Santa Fe 1500',
+    googleMapsUrl: 'https://maps.google.com/?q=-34.5884,-58.4306',
     area: {
       total: 120,
       covered: 120
@@ -126,6 +130,7 @@ export const mockProperties: Property[] = [
     location: 'Caballito',
     zone: 'Caballito',
     address: 'Av. Pedro Goyena 1200',
+    googleMapsUrl: 'https://maps.google.com/?q=-34.5884,-58.4306',
     bedrooms: 2,
     bathrooms: 1,
     area: {
@@ -146,6 +151,7 @@ export const mockProperties: Property[] = [
     location: 'Puerto Madero',
     zone: 'Puerto Madero',
     address: 'Juana Manso 1200',
+    googleMapsUrl: 'https://maps.google.com/?q=-34.5884,-58.4306',
     bedrooms: 4,
     bathrooms: 3,
     area: {
@@ -164,6 +170,7 @@ export const mockProperties: Property[] = [
     listingType: 'venta',
     location: 'Vicente López',
     zone: 'Vicente López',
+    googleMapsUrl: 'https://maps.google.com/?q=-34.5884,-58.4306',
     address: 'Av. Maipú 2500',
     bedrooms: 4,
     bathrooms: 2,
@@ -184,6 +191,7 @@ export const mockProperties: Property[] = [
     location: 'Palermo Soho',
     zone: 'Palermo',
     address: 'Thames 1500',
+    googleMapsUrl: 'https://maps.google.com/?q=-34.5884,-58.4306',
     bedrooms: 1,
     bathrooms: 1,
     area: {
@@ -202,6 +210,7 @@ export const mockProperties: Property[] = [
     listingType: 'venta',
     opportunity: true,
     location: 'Villa Crespo',
+    googleMapsUrl: 'https://maps.google.com/?q=-34.5884,-58.4306',
     zone: 'Villa Crespo',
     address: 'Av. Corrientes 5200',
     bedrooms: 2,
@@ -218,6 +227,7 @@ export const mockProperties: Property[] = [
     description: '¡Oportunidad! Local a estrenar en zona comercial',
     price: 850,
     images: PROPERTY_IMAGES.LOCAL,
+    googleMapsUrl: 'https://maps.google.com/?q=-34.5884,-58.4306',
     type: 'local',
     listingType: 'alquiler',
     opportunity: true,

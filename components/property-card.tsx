@@ -10,7 +10,7 @@ export default function PropertyCard({ property }: { property: Property }) {
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
 
   const isFavorite = (propertyId: string) => {
-    return favorites.some(fav => fav.id === propertyId);
+    return favorites.some(fav => fav === propertyId);
   };
 
   const toggleFavorite = (e: React.MouseEvent, property: Property) => {
@@ -18,7 +18,7 @@ export default function PropertyCard({ property }: { property: Property }) {
     if (isFavorite(property.id)) {
       removeFromFavorites(property.id);
     } else {
-      addToFavorites(property);
+      addToFavorites(property.id);
     }
   };
 
